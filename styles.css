@@ -1,8 +1,8 @@
 /* Minimalistic Website Styles */
 body {
 	font-family: 'Segoe UI', Arial, sans-serif;
-	background: #f9f9f9;
-	color: #222;
+	background: #000B58;
+	color: hsl(0, 0%, 13%);
 	margin: 0;
 	padding: 0;
 }
