@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Service | Siganga Family Farm</title>
+    <link rel="stylesheet" href="premium.css">
+    <!-- this for the logo-->
+    <link rel="icon" href="lulusiggy (5).png" type="image/png">
+    <!-- this is for the favicon-->
+    <link rel="shortcut icon" href="lulusiggy (5).png" type="image/png">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="products.html">Our Products</a></li>
+            <li><a href="premium.html">Premium Service</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+    <main>
+        <!-- Premium Hero Section -->
+        <section class="premium-hero">
+            <h1>Siganga Farm Premium</h1>
+            <p>Subscribe to our seasonal subscription boxes and custom farm allotments. Receive the absolute finest of our harvest, hand-selected and delivered straight from our pastures to your table.</p>
+        </section>
+
+        <!-- The Subscription Tiers -->
+        <section class="premium-services-container">
+            <h2>Our Curated Farm Shares</h2>
+            <p class="section-intro">Choose a seasonal plan tailored to your household. All memberships enjoy priority access to low-yield specialty items like our pure honey and custom chilli batches.</p>
+            
+            <div class="premium-grid">
+                <!-- Tier 1 -->
+                <div class="premium-card">
+                    <div class="tier-badge">Weekly Harvest</div>
+                    <h3>The Garden Basket Share</h3>
+                    <p class="price">KSh 3,500 <span>/ Month</span></p>
+                    <p class="tier-desc">A hand-picked selection of our freshest seasonal crops. Perfect for families who love clean, traditional eating.</p>
+                    <ul class="tier-features">
+                        <li>Fresh Spinach, Kale & Heritage Cabbage</li>
+                        <li>Traditional Greens (Mrenda & Saga)</li>
+                        <li>Garden Staples: Tomatoes, Onions & Peppers</li>
+                        <li>Complimentary seasonal orchard fruits</li>
+                    </ul>
+                </div>
+
+                <!-- Tier 2 (Highlighted) -->
+                <div class="premium-card elite-card">
+                    <div class="tier-badge elite-badge">Most Popular</div>
+                    <h3>The Pitmaster & Roast Share</h3>
+                    <p class="price">KSh 7,000 <span>/ Month</span></p>
+                    <p class="tier-desc">A premium monthly protein box sourced entirely from our free-range, grass-fed pasture livestock herds.</p>
+                    <ul class="tier-features">
+                        <li>Prime cuts of fresh Beef & Choice Pork</li>
+                        <li>Traditional layout dried meat options</li>
+                        <li>Free-range Chicken & tender Goat portions</li>
+                        <li>Included jar of cooking Tallow & Herb bundles</li>
+                    </ul>
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="premium-card">
+                    <div class="tier-badge">All-Inclusive</div>
+                    <h3>The Full Farm Experience</h3>
+                    <p class="price">KSh 10,000 <span>/ Month</span></p>
+                    <p class="tier-desc">The ultimate Siganga Farm membership combining the complete array of our fields, crafts, and livestock inventory.</p>
+                    <ul class="tier-features">
+                        <li>Complete Garden Basket + Premium Protein Box</li>
+                        <li>Guaranteed priority Raw Honey allocations</li>
+                        <li>Monthly Premium Beef Tallow skincare jar</li>
+                        <li>Freshly milled stone-ground Ugali Flour</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subscription Form Section -->
+       <section class="signup-section" style="margin-top: 40px; padding: 20px; background: #ffffff; border-radius: 8px;">
+            <h2>Join the Premium Waitlist</h2>
+            <p class="section-intro" style="margin-bottom: 25px;">Spaces for our seasonal delivery routes are limited to ensure elite quality control. Secure your family's slot below.</p>
+            
+            <form class="premium-form" action="#" method="POST" style="display: flex; flex-direction: column; max-width: 600px;">
+                
+                <div class="form-group" style="margin-bottom: 20px; display: flex; flex-direction: column;">
+                    <label for="fullname" style="font-weight: bold; margin-bottom: 8px;">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Lwanga Siganga" required style="padding: 10px; font-size: 1rem; width: 100%; box-sizing: border-box;">
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 20px; display: flex; flex-direction: column;">
+                    <label for="email" style="font-weight: bold; margin-bottom: 8px;">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="name@siganga.com" required style="padding: 10px; font-size: 1rem; width: 100%; box-sizing: border-box;">
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 20px; display: flex; flex-direction: column;">
+                    <label for="tier-select" style="font-weight: bold; margin-bottom: 8px;">Select Your Preferred Share Plan</label>
+                    <select id="tier-select" name="tier-select" required style="padding: 10px; font-size: 1rem; width: 100%; box-sizing: border-box;">
+                        <option value="" disabled selected>-- Choose a Plan --</option>
+                        <option value="garden">The Garden Basket Share (KSh 3,500/mo)</option>
+                        <option value="meat">The Pitmaster & Roast Share (KSh 7,500/mo)</option>
+                        <option value="homestead">The Full Homestead Experience (KSh 10,500/mo)</option>
+                    </select>
+                </div>
+
+                <!-- Fixed Delivery Area with explicit margins -->
+                <div class="form-group" style="margin-bottom: 25px; display: flex; flex-direction: column;">
+                    <label for="delivery-address" style="font-weight: bold; margin-bottom: 10px;">Delivery / Drop-off Address</label>
+                    <textarea id="delivery-address" name="delivery-address" rows="4" placeholder="Enter your residential or preferred delivery details..." required style="padding: 12px; font-size: 1rem; width: 100%; box-sizing: border-box; min-height: 100px;"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn" style="background-color: #d96b27; color: white; padding: 12px 24px; font-size: 1rem; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; width: fit-content;">Request Premium Membership</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Siganga Family Farm. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

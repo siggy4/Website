@@ -3,33 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | Simple Website</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Contact Us | Siganga Family Farm</title>
+    <!-- this for the logo-->
+    <link rel="icon" href="lulusiggy (5).png" type="image/png">
+    <!-- this is for the favicon-->
+    <link rel="shortcut icon" href="lulusiggy (5).png" type="image/png">
 </head>
 <body>
+
+    <!-- Navigation Menu Bar -->
     <nav>
         <ul>
             <li><a href="home.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="products.html">Our Products</a></li>
+            <li><a href="premium.html">Premium Service</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
         </ul>
     </nav>
+
     <main>
-        <section class="contact">
-            <h1>Contact Me</h1>
-            <p>Email: your.email@example.com</p>
-            <p>Phone: (123) 456-7890</p>
-            <p>Or use the form below:</p>
-            <form>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required><br>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required><br>
-                <label for="message">Message:</label><br>
-                <textarea id="message" name="message" rows="4" required></textarea><br>
-                <button type="submit">Send</button>
+        
+        <!-- Header Section -->
+        <header>
+            <h1>Get in Touch</h1>
+            <p>Have questions about our premium shares, livestock availability, or want to visit the farmstead? Drop us a line.</p>
+        </header>
+
+        <hr>
+
+        <!-- Section 1: Farm Information Details -->
+        <section>
+            <h2>Farm Headquarters</h2>
+            
+            <ul>
+                <li><strong>Location:</strong> Siganga Family Farm, Kakamega / Nairobi Outskirts, Kenya</li>
+                <li><strong>Phone:</strong> +254 700 000000</li>
+                <li><strong>Email:</strong> info@sigangafarm.com</li>
+            </ul>
+
+            <h3>Gate Hours</h3>
+            <ul>
+                <li><strong>Monday - Friday:</strong> 7:00 AM - 5:00 PM</li>
+                <li><strong>Saturday:</strong> 8:00 AM - 12:00 PM</li>
+                <li><strong>Sunday:</strong> Closed (Family Day)</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <!-- Section 2: Contact Inquiry Form -->
+        <section>
+            <h2>Send Us a Message</h2>
+            
+            <form action="#" method="POST">
+                
+                <!-- Name Block -->
+                <p>
+                    <label for="name">Your Name:</label>
+                    <br>
+                    <input type="text" id="name" name="name" placeholder="Lwanga Siganga" required>
+                </p>
+
+                <!-- Email Block -->
+                <p>
+                    <label for="contact-email">Email Address:</label>
+                    <br>
+                    <input type="email" id="contact-email" name="contact-email" placeholder="yourname@example.com" required>
+                </p>
+
+                <!-- Dropdown Select Block -->
+                <p>
+                    <label for="subject">Subject:</label>
+                    <br>
+                    <select id="subject" name="subject" required>
+                        <option value="general">General Farm Inquiry</option>
+                        <option value="order">Custom Meat/Vegetable Order</option>
+                        <option value="visit">Schedule a Tour/Visit</option>
+                        <option value="premium">Premium Subscription Issue</option>
+                    </select>
+                </p>
+
+                <!-- Message Box Block (Using paragraphs to force natural vertical stack spacing) -->
+                <p>
+                    <label for="message">Your Message:</label>
+                    <br>
+                    <textarea id="message" name="message" rows="8" cols="50" placeholder="Write your message here..." required></textarea>
+                </p>
+
+                <!-- Submit Action Button -->
+                <p>
+                    <button type="submit">Send Message</button>
+                </p>
+                
             </form>
         </section>
+
     </main>
+
+    <hr>
+
+    <!-- Footer Copyright -->
+    <footer>
+        <p>&copy; 2026 Siganga Family Farm. All Rights Reserved.</p>
+    </footer>
+
 </body>
 </html>
