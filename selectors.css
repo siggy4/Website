@@ -1,0 +1,41 @@
+
+/* THIS IS AN EXTERNAL CSS FILE */
+
+
+p {
+  text-align: center;
+  color: red;
+}
+/* This is an element selector. */
+
+#para1 {
+  text-align: center;
+  color: red;
+}
+/* This is an id selector. */
+
+.center{
+    text-align: center;
+    color: red;
+}
+
+/* This is a class selector. */
+
+input[type="text"] {
+  border: 1px solid #999;
+  padding: 6px;
+}
+/* This is an attribute selector. */
+
+* {
+  box-sizing: border-box;
+}
+/* This is a universal selector. */
+
+h1,
+h2,
+h3 {
+  font-family: Georgia, serif;
+}
+/* This is a grouping selector. */
+
