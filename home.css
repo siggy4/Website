@@ -6,8 +6,8 @@ body {
 
 body {
     margin: 0;
-    background: linear-gradient(#000000, #ff0000);
-    background-image: url("swimteampic.jpeg");
+    background: linear-gradient(#ffffff);
+    background-image: url("hii.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -21,11 +21,20 @@ a {
 }
 
 a:visited {
-    color: #d8a9ff;
+    color: #000000;
 }
 
 a:hover,
 a:focus {
-    color: #00e5ff;
+    color: #0088ff;
     text-decoration: underline;
+}
+
+h1,h2,h3 {
+    color: rgb(34, 255, 0);
+}
+
+p{
+    font-size: 20px;
+    color: rgb(34, 255, 0);
 }
