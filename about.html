@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | Siganga Family Farm</title>
-    <link rel="stylesheet" href="home.css?v=6">
-    <!-- this for the logo-->
+    <link rel="stylesheet" href="home.css?v=8">
     <link rel="icon" href="lulusiggy (5).png" type="image/png">
-    <!-- this is for the favicon-->
     <link rel="shortcut icon" href="lulusiggy (5).png" type="image/png">
 </head>
-<body>
+<body class="about-page">
+
     <nav>
         <ul>
             <li><a href="home.html">Home</a></li>
@@ -20,14 +19,17 @@
             <li><a href="contact.html">Contact Us</a></li>
         </ul>
     </nav>
+
     <main>
-        <!-- About Hero Section -->
+
         <section class="hero">
-            <h1>Our History & Legacy</h1>
+            <div class="hero-img-wrap">
+                <img src="images/farm-story.jpg" alt="Siganga Family Farm pastures">
+            </div>
+            <h1>Our History &amp; Legacy</h1>
             <p>Rooted in tradition, sustained by family values, and growing strong since 1919.</p>
         </section>
 
-        <!-- History Narrative Box -->
         <section class="work">
             <h2>Our Story</h2>
             <p>
@@ -36,88 +38,100 @@
             <p>
                 As the decades passed, the farm was proudly handed down through generations. Each era brought unique changes, but our dedication to raw honey, pure beef tallow, organic traditional greens, and clean pasture-raised livestock has never wavered. Today, we bridge historical wisdom with modern sustainable practices.
             </p>
+            <img class="story-img" src="images/farm-team.jpg" alt="Farm fields at Siganga Family Farm">
         </section>
 
-        <!-- Integrated Family Tree -->
         <section class="family-tree-section">
             <h2>The Siganga Family Tree</h2>
             <p class="section-intro">Meet the generations keeping our heritage alive today.</p>
-            
+
             <div class="tree-container">
-                <!-- Parents Row -->
                 <div class="tree-row parents">
                     <div class="tree-node">
                         <h3>Dave Siganga</h3>
-                        <p>Farm Infrastructure & Strategy</p>
+                        <p>Farm Infrastructure &amp; Strategy</p>
                     </div>
                     <div class="tree-node">
                         <h3>Elisheba Siganga</h3>
-                        <p>Operations & Organic Quality Control</p>
+                        <p>Operations &amp; Organic Quality Control</p>
                     </div>
                 </div>
-                
-                <!-- Connection Line Divider -->
+
                 <div class="tree-line"></div>
-                
-                <!-- Children Row -->
+
                 <div class="tree-row children">
                     <div class="tree-node">
                         <h3>Lerato Siganga</h3>
-                        <p>Livestock Management & Honey Harvest</p>
+                        <p>Livestock Management &amp; Honey Harvest</p>
                     </div>
                     <div class="tree-node current-user">
                         <h3>Lwanga Siganga</h3>
-                        <p>Digital Management & Tallow Production</p>
+                        <p>Digital Management &amp; Tallow Production</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Dedicated Farm Workers Section -->
         <section class="farm-livestock">
             <h2>Our Dedicated Farm Team</h2>
             <p class="section-intro">It takes a village to tend the soil. Meet the hard-working hands who help maintain our crops and livestock daily.</p>
 
-            <p class="slide-note">Slide horizontally to browse the team cards.</p>
-            <div class="slideshow" aria-label="Dedicated farm team slideshow">
-                <div class="slideshow-track">
-                    <article class="slide-card">
-                        <h3>John Omwamba</h3>
-                        <p><strong>Field Supervisor</strong></p>
-                        <p>Manages crop rotation for kales, traditional greens, and seasonal produce rows.</p>
-                    </article>
-                    <article class="slide-card">
-                        <h3>Grace Achieng</h3>
-                        <p><strong>Livestock Handler</strong></p>
-                        <p>Oversees free-range chicken health, goat care, and daily pasture rotations.</p>
-                    </article>
-                    <article class="slide-card">
-                        <h3>Samuel Mwangi</h3>
-                        <p><strong>Head Apiarist</strong></p>
-                        <p>Tends native hives and ensures premium raw honey quality across harvest cycles.</p>
-                    </article>
-                    <article class="slide-card">
-                        <h3>Mary Wambui</h3>
-                        <p><strong>Mill &amp; Tallow Specialist</strong></p>
-                        <p>Handles stone-grinding for Ugali flour and artisanal rendering of pure beef tallow.</p>
-                    </article>
-                    <article class="slide-card">
-                        <h3>David Kiprop</h3>
-                        <p><strong>Orchard Caretaker</strong></p>
-                        <p>Nurtures pomegranates, apples, and watermelon patches through changing seasons.</p>
-                    </article>
-                    <article class="slide-card">
-                        <h3>Florence Atieno</h3>
-                        <p><strong>Harvest Coordinator</strong></p>
-                        <p>Manages sorting, packaging, and prep for custom fresh vegetable boxes.</p>
-                    </article>
+            <div class="slideshow-wrapper">
+                <div class="slideshow" aria-label="Dedicated farm team slideshow">
+                    <div class="slideshow-track">
+                        <article class="slide-card">
+                            <img class="team-avatar" src="images/farm-team.jpg" alt="John Omwamba">
+                            <h3>John Omwamba</h3>
+                            <p><strong>Field Supervisor</strong></p>
+                            <p>Manages crop rotation for kales, traditional greens, and seasonal produce rows.</p>
+                        </article>
+                        <article class="slide-card">
+                            <img class="team-avatar" src="images/farm-team.jpg" alt="Grace Achieng">
+                            <h3>Grace Achieng</h3>
+                            <p><strong>Livestock Handler</strong></p>
+                            <p>Oversees free-range chicken health, goat care, and daily pasture rotations.</p>
+                        </article>
+                        <article class="slide-card">
+                            <img class="team-avatar" src="images/honey.jpg" alt="Samuel Mwangi">
+                            <h3>Samuel Mwangi</h3>
+                            <p><strong>Head Apiarist</strong></p>
+                            <p>Tends native hives and ensures premium raw honey quality across harvest cycles.</p>
+                        </article>
+                        <article class="slide-card">
+                            <img class="team-avatar" src="images/tallow.jpg" alt="Mary Wambui">
+                            <h3>Mary Wambui</h3>
+                            <p><strong>Mill &amp; Tallow Specialist</strong></p>
+                            <p>Handles stone-grinding for Ugali flour and artisanal rendering of pure beef tallow.</p>
+                        </article>
+                        <article class="slide-card">
+                            <img class="team-avatar" src="images/apples.jpg" alt="David Kiprop">
+                            <h3>David Kiprop</h3>
+                            <p><strong>Orchard Caretaker</strong></p>
+                            <p>Nurtures pomegranates, apples, and watermelon patches through changing seasons.</p>
+                        </article>
+                        <article class="slide-card">
+                            <img class="team-avatar" src="images/kale.jpg" alt="Florence Atieno">
+                            <h3>Florence Atieno</h3>
+                            <p><strong>Harvest Coordinator</strong></p>
+                            <p>Manages sorting, packaging, and prep for custom fresh vegetable boxes.</p>
+                        </article>
+                    </div>
+                </div>
+                <div class="slideshow-controls">
+                    <button class="slide-btn slide-prev" aria-label="Previous">&#8592;</button>
+                    <div class="slide-dots"></div>
+                    <button class="slide-btn slide-next" aria-label="Next">&#8594;</button>
                 </div>
             </div>
         </section>
+
     </main>
+
     <footer>
         <p>&copy; 2026 Siganga Family Farm. All Rights Reserved.</p>
     </footer>
+
     <script src="slideshow.js"></script>
+    <script src="farm.js"></script>
 </body>
 </html>

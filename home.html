@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Siganga Family Farm | Home</title>
-    <link rel="stylesheet" href="home.css?v=6">
+    <link rel="stylesheet" href="home.css?v=8">
     <link rel="icon" href="lulusiggy (5).png" type="image/png">
     <link rel="shortcut icon" href="lulusiggy (5).png" type="image/png">
 </head>
@@ -19,7 +19,12 @@
         </ul>
     </nav>
     <main>
+        <div id="welcome-banner"></div>
+
         <section class="hero">
+            <div class="hero-img-wrap">
+                <img src="images/farm-hero.jpg" alt="Siganga Family Farm golden fields">
+            </div>
             <h1>Siganga Family Farm | Home</h1>
             <p>Welcome to the Siganga Family Farm website. Explore our projects, achievements, and get in touch with us.</p>
             <a href="products.html" class="cta-btn">Explore Our Harvest</a>
@@ -70,9 +75,17 @@
             <h2>Contact Information</h2>
             <p>Find us here! Reach out for fresh batches, custom vegetable boxes, or livestock sales information.</p>
         </section>
+
+        <section>
+            <h2>Did You Know?</h2>
+            <p>Discover interesting facts about Siganga Family Farm.</p>
+            <button id="fact-btn" class="cta-btn">Show a Farm Fact</button>
+            <div id="fact-display"></div>
+        </section>
     </main>
     <footer>
         <p>&copy; 2026 Siganga Family Farm. All Rights Reserved.</p>
     </footer>
+    <script src="farm.js"></script>
 </body>
 </html>
