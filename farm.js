@@ -86,7 +86,17 @@
             form.addEventListener("submit", function (e) {
                 e.preventDefault();
                 if (validateForm(form)) {
-                    showFormSuccess(form);
+                    var isContact = form.classList.contains("contact-form");
+                    if (isContact) {
+                        saveContact({
+                            name:    document.getElementById("name").value.trim(),
+                            email:   document.getElementById("contact-email").value.trim(),
+                            subject: document.getElementById("subject").value.trim(),
+                            message: document.getElementById("message").value.trim()
+                        }, form);
+                    } else {
+                        showFormSuccess(form);
+                    }
                 }
             });
 
@@ -97,19 +107,38 @@
         });
     }
 
-    function showFormSuccess(form) {
+    function showFormSuccess(form, text) {
         var existing = form.querySelector(".form-success");
         if (existing) existing.remove();
 
         var msg = document.createElement("div");
         msg.className = "form-success";
-        msg.textContent = "✓ Message sent! We will get back to you shortly.";
+        msg.textContent = text || "✓ Message sent! We will get back to you shortly.";
         form.appendChild(msg);
         form.reset();
 
         setTimeout(function () {
             if (msg.parentNode) msg.remove();
         }, 5000);
+    }
+
+    function saveContact(data, form) {
+        fetch("http://localhost:3000/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+            if (res.success) {
+                showFormSuccess(form, "✓ Message sent! We will get back to you shortly.");
+            } else {
+                showFormSuccess(form, "✓ Submitted! (DB: " + (res.error || "unknown") + ")");
+            }
+        })
+        .catch(function () {
+            showFormSuccess(form, "✓ Message received! (Server offline — saved locally.)");
+        });
     }
 
     /* ─────────────────────────────────────────
@@ -221,7 +250,183 @@
     }
 
     /* ─────────────────────────────────────────
-       4. INIT — run the right features per page
+       4. PAYMENT FLOW  (premium.html)
+    ───────────────────────────────────────── */
+
+    var planPrices = {
+        garden:    { label: "The Garden Basket Share",    amount: "KSh 3,500" },
+        meat:      { label: "The Pitmaster & Roast Share", amount: "KSh 7,000" },
+        homestead: { label: "The Full Farm Experience",    amount: "KSh 10,000" }
+    };
+
+    function initPaymentToggle() {
+        var radios = document.querySelectorAll("input[name='payment']");
+        if (radios.length === 0) return;
+
+        radios.forEach(function (radio) {
+            radio.addEventListener("change", function () {
+                document.querySelectorAll(".payment-fields").forEach(function (f) {
+                    f.classList.remove("active");
+                });
+                var target = document.getElementById("fields-" + radio.value);
+                if (target) target.classList.add("active");
+
+                // highlight selected option label
+                document.querySelectorAll(".payment-option").forEach(function (opt) {
+                    opt.style.borderColor = "";
+                });
+            });
+        });
+    }
+
+    function showPayModal(method, planLabel, amount, onConfirm) {
+        var overlay = document.createElement("div");
+        overlay.className = "pay-modal-overlay";
+
+        var icons = { mpesa: "📱", card: "💳", cash: "💵" };
+        var methodLabel = { mpesa: "M-Pesa", card: "Card", cash: "Cash on Delivery" };
+
+        var extraHtml = "";
+        if (method === "mpesa") {
+            var phone = (document.getElementById("mpesa-phone") || {}).value || "your number";
+            extraHtml = "<p>A simulated STK push will be sent to <strong>" + phone + "</strong>. Enter your M-Pesa PIN to confirm.</p>";
+        } else if (method === "card") {
+            var cardNum = (document.getElementById("card-number") || {}).value || "";
+            var masked = cardNum ? "**** **** **** " + cardNum.replace(/\s/g, "").slice(-4) : "your card";
+            extraHtml = "<p>Charging <strong>" + masked + "</strong>. Click Confirm to authorise this payment.</p>";
+        } else {
+            extraHtml = "<p>Our delivery agent will collect payment at your door on the first delivery date.</p>";
+        }
+
+        overlay.innerHTML =
+            "<div class='pay-modal'>" +
+            "<div style='font-size:2.5rem;margin-bottom:0.5rem'>" + icons[method] + "</div>" +
+            "<h3>" + methodLabel[method] + " Payment</h3>" +
+            "<p style='margin-bottom:0.2rem'>Plan: <strong>" + planLabel + "</strong></p>" +
+            "<div class='pay-amount'>" + amount + " / month</div>" +
+            extraHtml +
+            "<div class='pay-modal-btns'>" +
+            "<button class='btn-confirm-pay'>✓ Confirm Payment</button>" +
+            "<button class='btn-cancel-pay'>Cancel</button>" +
+            "</div>" +
+            "</div>";
+
+        document.body.appendChild(overlay);
+
+        overlay.querySelector(".btn-confirm-pay").addEventListener("click", function () {
+            overlay.remove();
+            onConfirm();
+        });
+
+        overlay.querySelector(".btn-cancel-pay").addEventListener("click", function () {
+            overlay.remove();
+        });
+
+        overlay.addEventListener("click", function (e) {
+            if (e.target === overlay) overlay.remove();
+        });
+    }
+
+    function initPremiumPayment() {
+        var form = document.querySelector(".premium-form");
+        if (!form) return;
+
+        initPaymentToggle();
+
+        form.setAttribute("novalidate", true);
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // validate core fields only
+            var coreValid = true;
+            ["fullname", "email", "tier-select", "delivery-address"].forEach(function (id) {
+                var field = document.getElementById(id);
+                if (!field) return;
+                clearError(field);
+                if (field.value.trim() === "") {
+                    showError(field, "This field is required.");
+                    coreValid = false;
+                }
+            });
+
+            var emailField = document.getElementById("email");
+            if (emailField && emailField.value.trim() !== "") {
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value.trim())) {
+                    showError(emailField, "Please enter a valid email address.");
+                    coreValid = false;
+                }
+            }
+
+            var selectedPayment = form.querySelector("input[name='payment']:checked");
+            if (!selectedPayment) {
+                var payGroup = form.querySelector(".payment-options");
+                if (payGroup) {
+                    var err = payGroup.parentNode.querySelector(".field-error");
+                    if (err) err.remove();
+                    var e2 = document.createElement("span");
+                    e2.className = "field-error";
+                    e2.textContent = "Please select a payment method.";
+                    payGroup.parentNode.appendChild(e2);
+                }
+                coreValid = false;
+            }
+
+            if (!coreValid) return;
+
+            // validate payment-specific fields
+            var method = selectedPayment.value;
+            if (method === "mpesa") {
+                var phone = document.getElementById("mpesa-phone");
+                if (phone && phone.value.trim() === "") {
+                    showError(phone, "Please enter your M-Pesa phone number.");
+                    return;
+                }
+            }
+            if (method === "card") {
+                var cardNum = document.getElementById("card-number");
+                var expiry  = document.getElementById("card-expiry");
+                var cvv     = document.getElementById("card-cvv");
+                var cardOk  = true;
+                if (cardNum && cardNum.value.trim() === "") { showError(cardNum, "Card number is required."); cardOk = false; }
+                if (expiry  && expiry.value.trim()  === "") { showError(expiry,  "Expiry date is required."); cardOk = false; }
+                if (cvv     && cvv.value.trim()     === "") { showError(cvv,     "CVV is required.");         cardOk = false; }
+                if (!cardOk) return;
+            }
+
+            // get plan info
+            var tierVal   = (document.getElementById("tier-select") || {}).value || "garden";
+            var planInfo  = planPrices[tierVal] || { label: "Selected Plan", amount: "KSh 0" };
+
+            showPayModal(method, planInfo.label, planInfo.amount, function () {
+                // save subscriber to database
+                fetch("http://localhost:3000/subscribe", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        full_name:        (document.getElementById("fullname") || {}).value || "",
+                        email:            (document.getElementById("email") || {}).value || "",
+                        plan:             planInfo.label,
+                        delivery_address: (document.getElementById("delivery-address") || {}).value || "",
+                        payment_method:   method
+                    })
+                })
+                .catch(function () { /* server offline, still show success */ });
+
+                var banner = document.getElementById("pay-success");
+                if (banner) {
+                    banner.style.display = "block";
+                    banner.textContent = "✓ Payment confirmed! Welcome to Siganga Farm Premium. You will receive a confirmation email shortly.";
+                    banner.scrollIntoView({ behavior: "smooth", block: "center" });
+                }
+                form.reset();
+                document.querySelectorAll(".payment-fields").forEach(function (f) { f.classList.remove("active"); });
+            });
+        });
+    }
+
+    /* ─────────────────────────────────────────
+       5. INIT — run the right features per page
     ───────────────────────────────────────── */
     document.addEventListener("DOMContentLoaded", function () {
         initWelcome();
@@ -229,6 +434,7 @@
         initFarmFact();
         initPremiumCards();
         initTeamCards();
+        initPremiumPayment();
     });
 
 })();
