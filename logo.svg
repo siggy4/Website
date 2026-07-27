@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 160" width="100%" height="100%">
+  <defs>
+    <!-- Circular Crop for Emblem -->
+    <clipPath id="emblem-clip">
+      <circle cx="80" cy="80" r="65" />
+    </clipPath>
+  </defs>
+
+  <!-- BACKGROUND & EMBLEM BADGE -->
+  <g id="logo-emblem">
+    <!-- Base Outer Circle (Gold Border) -->
+    <circle cx="80" cy="80" r="70" fill="#FAB839" />
+    
+    <!-- Inner Sky Background (Deep Forest Green) -->
+    <circle cx="80" cy="80" r="65" fill="#2A4736" />
+
+    <!-- Clipped Elements (Sun and Pastures) -->
+    <g clip-path="url(#emblem-clip)">
+      <!-- Rising Sun (Harvest Gold) -->
+      <circle cx="80" cy="65" r="28" fill="#FAB839" />
+      
+      <!-- Back Pasture Hill (Olive Light Green) -->
+      <path d="M 10,120 Q 70,75 150,110 L 150,150 L 10,150 Z" fill="#3D634C" />
+      
+      <!-- Front Pasture Hill (Main Forest Green) -->
+      <path d="M -10,105 Q 80,125 170,85 L 170,160 L -10,160 Z" fill="#2A4736" />
+
+      <!-- White Sun Rays / Seed Accent -->
+      <path d="M 80,22 L 80,30 M 55,32 L 61,38 M 105,32 L 99,38" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+    </g>
+
+    <!-- White Inner Accent Ring -->
+    <circle cx="80" cy="80" r="64" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.4" />
+  </g>
+
+  <!-- BRAND TEXT SECTION -->
+  <g id="logo-text" transform="translate(165, 0)">
+    <!-- Primary Name -->
+    <text x="0" y="72" font-family="'Plus Jakarta Sans', 'Segoe UI', sans-serif" font-weight="800" font-size="34" fill="#2A4736" letter-spacing="1">SIGANGA</text>
+    
+    <!-- Secondary Name -->
+    <text x="0" y="105" font-family="'Plus Jakarta Sans', 'Segoe UI', sans-serif" font-weight="600" font-size="20" fill="#FAB839" letter-spacing="4">FAMILY FARM</text>
+    
+    <!-- Established / Tagline Line -->
+    <line x1="0" y1="120" x2="270" y2="120" stroke="#2A4736" stroke-width="2" opacity="0.3" />
+    <text x="0" y="136" font-family="'Plus Jakarta Sans', 'Segoe UI', sans-serif" font-weight="500" font-size="11" fill="#6E6458" letter-spacing="2">EST. 1919 • HERITAGE HARVEST</text>
+  </g>
+</svg>
