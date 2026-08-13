@@ -123,21 +123,23 @@
     }
 
     function saveContact(data, form) {
-        fetch("http://localhost:3000/contact", {
+        var formData = new FormData(form);
+
+        fetch("process_contact.php", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
+            body: formData
         })
         .then(function (r) { return r.json(); })
         .then(function (res) {
             if (res.success) {
                 showFormSuccess(form, "✓ Message sent! We will get back to you shortly.");
             } else {
-                showFormSuccess(form, "✓ Submitted! (DB: " + (res.error || "unknown") + ")");
+                showFormSuccess(form, "✓ Error: " + (res.error || "unknown error"));
             }
         })
-        .catch(function () {
-            showFormSuccess(form, "✓ Message received! (Server offline — saved locally.)");
+        .catch(function (err) {
+            console.error("Submission error:", err);
+            showFormSuccess(form, "✓ Could not reach server. Please try again.");
         });
     }
 
@@ -327,7 +329,7 @@
         });
     }
 
-    function initPremiumPayment() {
+function initPremiumPayment() {
         var form = document.querySelector(".premium-form");
         if (!form) return;
 
@@ -395,30 +397,44 @@
             }
 
             // get plan info
-            var tierVal   = (document.getElementById("tier-select") || {}).value || "garden";
-            var planInfo  = planPrices[tierVal] || { label: "Selected Plan", amount: "KSh 0" };
+            var tierVal  = (document.getElementById("tier-select") || {}).value || "garden";
+            var planInfo = planPrices[tierVal] || { label: "Selected Plan", amount: "KSh 0" };
 
             showPayModal(method, planInfo.label, planInfo.amount, function () {
-                // save subscriber to database
-                fetch("http://localhost:3000/subscribe", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        full_name:        (document.getElementById("fullname") || {}).value || "",
-                        email:            (document.getElementById("email") || {}).value || "",
-                        plan:             planInfo.label,
-                        delivery_address: (document.getElementById("delivery-address") || {}).value || "",
-                        payment_method:   method
-                    })
-                })
-                .catch(function () { /* server offline, still show success */ });
+                // Prepare form data for PHP POST processing
+                var formData = new FormData();
+                formData.append("fullName", (document.getElementById("fullname") || {}).value || "");
+                formData.append("email",    (document.getElementById("email") || {}).value || "");
+                formData.append("planType", planInfo.label);
+                formData.append("address",  (document.getElementById("delivery-address") || {}).value || "");
 
-                var banner = document.getElementById("pay-success");
-                if (banner) {
-                    banner.style.display = "block";
-                    banner.textContent = "✓ Payment confirmed! Welcome to Siganga Farm Premium. You will receive a confirmation email shortly.";
-                    banner.scrollIntoView({ behavior: "smooth", block: "center" });
-                }
+                // Send request to PHP script
+                fetch("process_subscribe.php", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(function (response) { return response.json(); })
+                .then(function (result) {
+                    var banner = document.getElementById("pay-success");
+                    if (banner) {
+                        banner.style.display = "block";
+                        if (result.success) {
+                            banner.textContent = "✓ Payment confirmed! Welcome to Siganga Farm Premium. You will receive a confirmation email shortly.";
+                        } else {
+                            banner.textContent = "⚠️ " + (result.error || "Subscription processing failed.");
+                        }
+                        banner.scrollIntoView({ behavior: "smooth", block: "center" });
+                    }
+                })
+                .catch(function (err) {
+                    console.error("Fetch Error:", err);
+                    var banner = document.getElementById("pay-success");
+                    if (banner) {
+                        banner.style.display = "block";
+                        banner.textContent = "✓ Form submitted (Server offline or error connecting to database).";
+                    }
+                });
+
                 form.reset();
                 document.querySelectorAll(".payment-fields").forEach(function (f) { f.classList.remove("active"); });
             });
